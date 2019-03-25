@@ -30,6 +30,8 @@ workon cv
 sudo modprobe bcm2835-v4l2 
 ```
 
+**Note** Create three directories in root folder prior to first run. "captures, dataset, and trainer"
+
 Sequence to run python scripts:
 1. registration.py - train a new face
 2. sentry.py - detect/track faces
