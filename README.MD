@@ -1,4 +1,4 @@
-# Faical Tracking
+# Facial Tracking
 
 Process and track human faces using OpenCV4 with a Raspberry Pi Camera mounted on a Pan/Tilt Platform.
 http://www.ajohnsoncode.com/face/
