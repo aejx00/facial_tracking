@@ -1,6 +1,7 @@
 # Faical Tracking
 
 Process and track human faces using OpenCV4 with a Raspberry Pi Camera mounted on a Pan/Tilt Platform.
+http://www.ajohnsoncode.com/face/
 
 ## Getting Started
 
@@ -43,7 +44,7 @@ Sequence to run python scripts:
 
 ## Authors
 
-* **Andrew Johnson** - *Initial work*
+* **Andrew Johnson**
 
 ## License
 
