@@ -1,6 +1,6 @@
 # Facial Tracking
 
-Process and track human faces using OpenCV4 with a Raspberry Pi Camera mounted on a Pan/Tilt Platform.
+Process and track human faces using OpenCV4 with a Raspberry Pi Camera mounted on a Pan/Tilt Platform. Shoot plastic dart if confidence threshold is met.
 http://www.ajohnsoncode.com/face/
 
 ## Getting Started
@@ -37,7 +37,7 @@ sudo modprobe bcm2835-v4l2
 
 Sequence to run python scripts:
 1. registration.py - train a new face
-2. sentry.py - detect/track faces
+2. sentry.py - detect/track/shoot faces
 
 ## Built With
 

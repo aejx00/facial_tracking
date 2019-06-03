@@ -9,13 +9,25 @@ firing logic uses input/output workaround instead of high/low logic to control t
 ammo = 6 # v959 plastic dart turret ammo count
 channel = 21 # 3V relay GPIO address
 
-# GPIO setup
+
 def gpio_setup():
+    """Set turret GPIO pin.
+        Args:
+            N/A
+        Returns:
+            N/A
+    """
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(channel, GPIO.IN)
 
 
 def fire_semi_auto():
+    """Fire single dart.
+        Args:
+            N/A
+        Returns:
+            N/A
+    """
     global ammo
     if ammo > 0:
         print('firing')
@@ -29,6 +41,12 @@ def fire_semi_auto():
 
 
 def fire_full_auto():
+    """Fire all darts.
+        Args:
+            N/A
+        Returns:
+            N/A
+    """
     global ammo
     ammo_count = ammo
     if ammo <= 0:
@@ -40,12 +58,24 @@ def fire_full_auto():
 
 
 def reload():
+   """Reload turret
+       Args:
+           N/A
+       Returns:
+           N/A
+   """
    global ammo
    ammo = 6
    print('turret reloaded')
 
 
 def cease_fire():
+    """Kill turret
+        Args:
+            N/A
+        Returns:
+            N/A
+    """
     GPIO.setup(channel, GPIO.IN)
     time.sleep(0.05)
 
