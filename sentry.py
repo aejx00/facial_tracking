@@ -2,8 +2,12 @@ from __future__ import division
 import os
 import cv2
 import time
+import turret
 import numpy as np
+import RPi.GPIO as GPIO
 import Adafruit_PCA9685
+
+turret.gpio_setup() # init turret
 
 # configure servo and video settings
 pan = 375
@@ -69,14 +73,15 @@ def detect():
             id, confidence = recognizer.predict(gray[y:y + h, x:x + w])
             if (confidence < 100): # check if confidence is less them 100 ==> "0" is perfect match
                 id = names[id]
+                confidence_int = int(round(100 - confidence))
                 confidence = "  {0}%".format(round(100 - confidence))
             else:
                 id = "Unknown Entity"
                 confidence = "  {0}%".format(round(100 - confidence))
             cv2.putText(img, str(id), (x + 5, y - 5), font, 1, (255, 255, 255), 2)
             cv2.putText(img, str(confidence), (x + 5, y + h - 5), font, 1, (255, 255, 0), 1)
-            cv2.putText(img, str(face_coord["x_axis"]) + ',' + str(face_coord["y_axis"]), (x + 5, y * 2), font, 1,
-                        (0, 0, 255), 2)
+            #cv2.putText(img, str(face_coord["x_axis"]) + ',' + str(face_coord["y_axis"]), (x + 5, y * 2), font, 1,
+            #            (0, 0, 255), 2)
         cv2.imshow('camera', img)
         # cv2.imwrite('/home/pi/Documents/FacialRecognitionProject/captures/' + str(int(time.time())) + '.jpg', img) # (optional) save snapshot of face
         if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -103,6 +108,8 @@ def detect():
                 tilt = 375
                 pwm.set_pwm(1, 0, pan)
                 pwm.set_pwm(0, 0, tilt)
+            if confidence_int > 50:
+                turret.fire_semi_auto() # fire turret
     print("\n Terminating Application")
 
 
@@ -111,3 +118,6 @@ if __name__ == '__main__':
         detect()
     except Exception as e:
         print(e)
+    finally:
+        turret.cease_fire()
+        GPIO.cleanup()

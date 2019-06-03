@@ -21,6 +21,7 @@ https://www.pyimagesearch.com/2018/09/26/install-opencv-4-on-your-raspberry-pi/
 ### Installing
 
 sudo pip install adafruit-pca9685
+sudo pip install RPi.GPIO
 
 ## Deployment
 
