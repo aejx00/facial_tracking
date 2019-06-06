@@ -7,7 +7,8 @@ import numpy as np
 import RPi.GPIO as GPIO
 import Adafruit_PCA9685
 
-turret.gpio_setup() # init turret
+turret.gpio_setup()
+#turret.cease_fire()
 
 # configure servo and video settings
 pan = 375
@@ -41,6 +42,7 @@ def detect():
         Returns:
             N/A
     """
+    targeted = False
     print("\n Initializing Sentry Application")
     recognizer = cv2.face.LBPHFaceRecognizer_create()
     recognizer.read('trainer/trainer.yml')
@@ -68,6 +70,8 @@ def detect():
         face_coord = {"x_axis": 0, "y_axis": 0}
         for (x, y, w, h) in faces:
             cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            if targeted:
+                cv2.circle(img, (x+120, y+90), 55, (0, 0, 255), 10)
             face_coord["x_axis"] = ((x + (x + w)) / 2) / 640
             face_coord["y_axis"] = ((y + (y + h)) / 2) / 480
             id, confidence = recognizer.predict(gray[y:y + h, x:x + w])
@@ -109,7 +113,10 @@ def detect():
                 pwm.set_pwm(1, 0, pan)
                 pwm.set_pwm(0, 0, tilt)
             if confidence_int > 50:
-                turret.fire_semi_auto() # fire turret
+                targeted = True
+                turret.fire_semi_auto()
+            else:
+                targeted = False
     print("\n Terminating Application")
 
 
