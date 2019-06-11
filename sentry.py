@@ -8,7 +8,6 @@ import RPi.GPIO as GPIO
 import Adafruit_PCA9685
 
 turret.gpio_setup()
-#turret.cease_fire()
 
 # configure servo and video settings
 pan = 375
