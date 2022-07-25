@@ -1,7 +1,7 @@
 # Facial Tracking
 
 Process and track human faces using OpenCV4 with a Raspberry Pi Camera mounted on a Pan/Tilt Platform. Shoot plastic dart if confidence threshold is met.
-http://www.ajohnsoncode.com/face/
+https://exceptionmishandler.com/facial-tracking-turret/
 
 ## Getting Started
 
